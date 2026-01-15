@@ -3,8 +3,8 @@ import './App.css'
 
 function App() {
   const playStoreLink = "https://play.google.com/store/apps/details?id=com.chamakz.app&pcampaignid=web_share"
-  const privacyPolicyLink = "#privacy-policy" // Replace with your actual privacy policy link
-  const contactEmail = "contact@yourapp.com" // Replace with your actual contact email
+  const privacyPolicyLink = "https://chamakz.app/privacy-policy" // Update with your actual privacy policy URL
+  const contactEmail = "info@chamakz.app" // Support email from Play Store
   
   const images = ['/app-screenshot.jpeg', '/image2.jpeg']
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
