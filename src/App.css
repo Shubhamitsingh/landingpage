@@ -21,10 +21,10 @@
 
 /* Header Section - Mobile First */
 .header {
-  background: linear-gradient(135deg, #000000 0%, #ff1493 50%, #1e90ff 100%);
+  background: white;
   backdrop-filter: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -46,9 +46,25 @@
   gap: 12px;
 }
 
-.header-spacer {
-  width: 45px;
-  height: 45px;
+.install-button {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #ffd700 100%);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.install-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 10px rgba(184, 134, 11, 0.5);
 }
 
 .app-name {
@@ -78,8 +94,10 @@
 .app-name {
   font-size: 20px;
   font-weight: 700;
-  color: white;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #000000 0%, #ff1493 50%, #1e90ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Hero Section - Mobile First */
@@ -109,7 +127,7 @@
   align-items: center;
   width: 100%;
   padding: 0;
-  padding-top: 75px;
+  padding-top: 65px;
 }
 
 .hero-image {
@@ -121,6 +139,78 @@
   object-fit: cover;
   object-position: center;
   max-width: 100%;
+  transition: opacity 0.5s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.image-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.image-nav-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.image-nav-prev {
+  left: 10px;
+}
+
+.image-nav-next {
+  right: 10px;
+}
+
+.image-indicators {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.image-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.image-indicator.active {
+  background: white;
+  width: 30px;
+  border-radius: 5px;
 }
 
 .download-overlay {
@@ -182,7 +272,7 @@
 }
 
 .headline {
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 900;
   line-height: 1.2;
   margin-bottom: 12px;
@@ -193,7 +283,7 @@
 }
 
 .description {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
   color: #ffffff;
   animation: fadeInUp 0.8s ease 0.2s both;

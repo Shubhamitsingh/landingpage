@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 function App() {
-  const playStoreLink = "https://play.google.com/store/apps/details?id=your.app.id" // Replace with your actual Play Store link
+  const playStoreLink = "https://play.google.com/store/apps/details?id=com.chamakz.app&pcampaignid=web_share"
   const privacyPolicyLink = "#privacy-policy" // Replace with your actual privacy policy link
   const contactEmail = "contact@yourapp.com" // Replace with your actual contact email
+  
+  const images = ['/app-screenshot.jpeg', '/image2.jpeg']
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length)
+  }
+  
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
+  }
 
   return (
     <div className="app">
@@ -27,7 +38,14 @@ function App() {
               </div>
             </div>
             <h1 className="app-name">Chamakz</h1>
-            <div className="header-spacer"></div>
+            <a 
+              href={playStoreLink} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="install-button"
+            >
+              Install
+            </a>
           </div>
         </div>
       </header>
@@ -37,7 +55,7 @@ function App() {
         <div className="hero-content">
           <div className="hero-image-container">
               <img 
-                src="/app-screenshot.jpeg" 
+                src={images[currentImageIndex]} 
                 alt="App Screenshot" 
                 className="hero-image"
                 onError={(e) => {
@@ -48,6 +66,17 @@ function App() {
               <div className="image-placeholder" style={{display: 'none'}}>
                 <span>📱</span>
                 <p>App Screenshot</p>
+              </div>
+              <button className="image-nav-btn image-nav-prev" onClick={prevImage}>‹</button>
+              <button className="image-nav-btn image-nav-next" onClick={nextImage}>›</button>
+              <div className="image-indicators">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`image-indicator ${index === currentImageIndex ? 'active' : ''}`}
+                    onClick={() => setCurrentImageIndex(index)}
+                  />
+                ))}
               </div>
               <div className="hero-text-overlay">
                 <h2 className="headline">Hot Videos & Live Shows</h2>
