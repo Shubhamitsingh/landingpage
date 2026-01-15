@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import './App.css'
 
 function App() {
@@ -8,6 +8,8 @@ function App() {
   
   const images = ['/app-screenshot.jpeg', '/image2.jpeg']
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
   
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length)
@@ -15,6 +17,32 @@ function App() {
   
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
+  }
+  
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX
+  }
+  
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return
+    
+    const distance = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 50
+    
+    if (distance > minSwipeDistance) {
+      // Swipe left - next image
+      nextImage()
+    } else if (distance < -minSwipeDistance) {
+      // Swipe right - previous image
+      prevImage()
+    }
+    
+    touchStartX.current = 0
+    touchEndX.current = 0
   }
 
   return (
@@ -53,7 +81,12 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-image-container">
+          <div 
+            className="hero-image-container"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
               <img 
                 src={images[currentImageIndex]} 
                 alt="App Screenshot" 
@@ -67,8 +100,6 @@ function App() {
                 <span>📱</span>
                 <p>App Screenshot</p>
               </div>
-              <button className="image-nav-btn image-nav-prev" onClick={prevImage}>‹</button>
-              <button className="image-nav-btn image-nav-next" onClick={nextImage}>›</button>
               <div className="image-indicators">
                 {images.map((_, index) => (
                   <button
