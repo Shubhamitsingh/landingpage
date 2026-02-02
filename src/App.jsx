@@ -1,49 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import './App.css'
 
 function App() {
   const playStoreLink = "https://play.google.com/store/apps/details?id=com.chamakz.app&pcampaignid=web_share"
   const privacyPolicyLink = "https://chamakz.app/privacy-policy" // Update with your actual privacy policy URL
   const contactEmail = "info@chamakz.app" // Support email from Play Store
-  
-  const images = ['/app-screenshot.jpeg', '/image2.jpeg']
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const touchStartX = useRef(0)
-  const touchEndX = useRef(0)
-  
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length)
-  }
-  
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
-  }
-  
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX
-  }
-  
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX
-  }
-  
-  const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return
-    
-    const distance = touchStartX.current - touchEndX.current
-    const minSwipeDistance = 50
-    
-    if (distance > minSwipeDistance) {
-      // Swipe left - next image
-      nextImage()
-    } else if (distance < -minSwipeDistance) {
-      // Swipe right - previous image
-      prevImage()
-    }
-    
-    touchStartX.current = 0
-    touchEndX.current = 0
-  }
 
   return (
     <div className="app">
@@ -81,14 +42,9 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div 
-            className="hero-image-container"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
+          <div className="hero-image-container">
               <img 
-                src={images[currentImageIndex]} 
+                src="/image2.jpeg" 
                 alt="App Screenshot" 
                 className="hero-image"
                 onError={(e) => {
@@ -100,17 +56,8 @@ function App() {
                 <span>📱</span>
                 <p>App Screenshot</p>
               </div>
-              <div className="image-indicators">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`image-indicator ${index === currentImageIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  />
-                ))}
-              </div>
               <div className="hero-text-overlay">
-                <h2 className="headline">Hot Videos & Live Shows</h2>
+                <h2 className="headline">Live Videos & Streaming</h2>
                 <p className="description">
                   Watch amazing live streams, connect with creators, and enjoy exclusive content. Join thousands of users streaming live now!
                 </p>
@@ -140,12 +87,7 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <div className="footer-content">
-            <a href={privacyPolicyLink} className="footer-link">Privacy Policy</a>
-            <span className="footer-separator">•</span>
-            <a href={`mailto:${contactEmail}`} className="footer-link">Contact Us</a>
-          </div>
-          <p className="footer-copyright">© 2024 Chamakz. All rights reserved.</p>
+          <p className="footer-copyright">© 2026 Chamakz. All rights reserved.</p>
         </div>
       </footer>
     </div>
