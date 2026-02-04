@@ -43,13 +43,25 @@ function App() {
       <section className="hero">
         <div className="hero-content">
           <div className="hero-image-container">
-              <img 
-                src="/image2.jpeg" 
-                alt="App Screenshot" 
+              <video 
+                src="/WhatsApp Video 2026-02-04 at 10.49.48 PM.mp4" 
                 className="hero-image"
+                autoPlay
+                loop
+                muted
+                playsInline
                 onError={(e) => {
                   e.target.style.display = 'none'
                   e.target.nextSibling.style.display = 'flex'
+                }}
+              />
+              <img 
+                src="/image2.jpeg" 
+                alt="App Screenshot" 
+                className="hero-image fallback-image"
+                style={{display: 'none'}}
+                onError={(e) => {
+                  e.target.style.display = 'none'
                 }}
               />
               <div className="image-placeholder" style={{display: 'none'}}>
